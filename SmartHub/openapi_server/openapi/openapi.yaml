@@ -1,0 +1,500 @@
+openapi: 3.0.0
+info:
+  description: This is a server to remote manage Raspberry_pi pins.
+  title: SmartHub server
+  version: 1.0.0
+servers:
+- url: http://smarthub.swagger.io/v2
+tags:
+- description: Usb
+  name: usb
+- description: Port
+  name: port
+- description: power
+  name: power
+- description: jtag
+  name: jtag
+- description: boot
+  name: boot
+paths:
+  /boot:
+    get:
+      description: modify boot status
+      operationId: get_boot
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Boot'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Boot'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: boot not found
+      summary: Boot status
+      tags:
+      - boot
+      x-openapi-router-controller: openapi_server.controllers.boot_controller
+    put:
+      description: modify boot status
+      operationId: put_boot
+      parameters:
+      - description: Or LOW or HIGH
+        explode: true
+        in: query
+        name: value
+        required: true
+        schema:
+          enum:
+          - low
+          - high
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Boot'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Boot'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Boot not found
+      summary: boot status
+      tags:
+      - boot
+      x-openapi-router-controller: openapi_server.controllers.boot_controller
+  /jtag:
+    get:
+      description: modify jtag status
+      operationId: get_jatg
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Jtag'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Jtag'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: jtag not found
+      summary: Jtag status
+      tags:
+      - jtag
+      x-openapi-router-controller: openapi_server.controllers.jtag_controller
+    put:
+      description: modify jtag status
+      operationId: put_jtag
+      parameters:
+      - description: Or LOW or HIGH
+        explode: true
+        in: query
+        name: value
+        required: true
+        schema:
+          enum:
+          - low
+          - high
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Jtag'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Jtag'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: jtag not found
+      summary: jtag status
+      tags:
+      - jtag
+      x-openapi-router-controller: openapi_server.controllers.jtag_controller
+  /port:
+    get:
+      description: Returns all single port
+      operationId: get_all_port
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Port'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Port not found
+      summary: Find all PORT
+      tags:
+      - port
+      x-openapi-router-controller: openapi_server.controllers.port_controller
+  /power:
+    get:
+      description: modify power status
+      operationId: get_power
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Power'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Power'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: power not found
+      summary: Power status
+      tags:
+      - power
+      x-openapi-router-controller: openapi_server.controllers.power_controller
+    put:
+      description: modify power status
+      operationId: put_power
+      parameters:
+      - description: Or LOW or HIGH
+        explode: true
+        in: query
+        name: value
+        required: true
+        schema:
+          enum:
+          - low
+          - high
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Power'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Power'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: power not found
+      summary: power status
+      tags:
+      - power
+      x-openapi-router-controller: openapi_server.controllers.power_controller
+  /usb:
+    get:
+      description: Returns all single usb
+      operationId: get_all_usb
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Usb'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usb'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Usb not found
+      summary: Find all USB
+      tags:
+      - usb
+      x-openapi-router-controller: openapi_server.controllers.usb_controller
+  /usb/{usbId}:
+    get:
+      description: Returns a single usb
+      operationId: get_usb_by_id
+      parameters:
+      - description: ID of usb to return
+        explode: false
+        in: path
+        name: usbId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Usb'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usb'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Usb not found
+      summary: Find usb by ID
+      tags:
+      - usb
+      x-openapi-router-controller: openapi_server.controllers.usb_controller
+    put:
+      description: Returns a single usb
+      operationId: put_usb_by_id
+      parameters:
+      - description: ID of usb to return
+        explode: false
+        in: path
+        name: usbId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Or LOW or HIGH
+        explode: true
+        in: query
+        name: value
+        required: true
+        schema:
+          enum:
+          - low
+          - high
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Usb'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usb'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Usb not found
+      summary: Find usb by ID
+      tags:
+      - usb
+      x-openapi-router-controller: openapi_server.controllers.usb_controller
+components:
+  requestBodies:
+    Usb:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Usb'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Usb'
+      description: Usb dynamics
+      required: true
+    Port:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Port'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Port'
+      description: Port dynamics
+      required: true
+    jtag:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Jtag'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Jtag'
+      description: jtag dynamics
+      required: true
+    power:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Power'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Power'
+      description: Power dynamics
+      required: true
+    boot:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Boot'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Boot'
+      description: Boot dynamics
+      required: true
+  schemas:
+    Usb:
+      description: usb status
+      example:
+        name: usb1
+        id: 0
+        status: low
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        name:
+          example: usb1
+          title: name
+          type: string
+        status:
+          deprecated: true
+          description: usb status
+          enum:
+          - low
+          - high
+          title: status
+          type: string
+      required:
+      - name
+      title: the Usb
+      type: object
+      xml:
+        name: Usb
+    Port:
+      description: port status
+      example:
+        name: port
+        id: 0
+        status: low
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        name:
+          example: port
+          title: name
+          type: string
+        status:
+          deprecated: true
+          description: port status
+          enum:
+          - low
+          - high
+          title: status
+          type: string
+      required:
+      - name
+      title: the Port
+      type: object
+      xml:
+        name: Usb
+    Jtag:
+      description: jtag status
+      example:
+        name: jtag
+        id: 0
+        status: low
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        name:
+          example: jtag
+          title: name
+          type: string
+        status:
+          deprecated: true
+          description: usb status
+          enum:
+          - low
+          - high
+          title: status
+          type: string
+      required:
+      - name
+      title: the Jtag
+      type: object
+      xml:
+        name: Jtag
+    Power:
+      description: Power status
+      example:
+        name: power
+        id: 0
+        status: low
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        name:
+          example: power
+          title: name
+          type: string
+        status:
+          deprecated: true
+          description: Power status
+          enum:
+          - low
+          - high
+          title: status
+          type: string
+      required:
+      - name
+      title: the Power
+      type: object
+      xml:
+        name: Power
+    Boot:
+      description: Boot status
+      example:
+        name: boot
+        id: 0
+        status: low
+      properties:
+        id:
+          format: int64
+          title: id
+          type: integer
+        name:
+          example: boot
+          title: name
+          type: string
+        status:
+          deprecated: true
+          description: Boot status
+          enum:
+          - low
+          - high
+          title: status
+          type: string
+      required:
+      - name
+      title: the Boot
+      type: object
+      xml:
+        name: Boot

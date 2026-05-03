@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SmartHub Controller</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Style content -->
+
+
+<!-- Ajax Libraries-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Refernce file syle -->
+<style type="text/css">
+	@import url(index.css);
+</style>
+
+<!-- Refernce file Functions -->
+<script type="text/javascript" src="xferinfo.js"></script>
+<script type="text/javascript" src="coding.js"></script>
+<script type="text/javascript" src="serialterminal.js"></script>
+</head>
+
+
+<section id="navbar">
+  <a href="#home">HOME</a>
+  <a href="#switches">SWITCHES</a>
+  <a href="#code">CODE</a>
+</section>
+
+<body>
+
+
+
+  <section class= "content1 "id="home">
+  <div class="slideshow-container">
+
+    <div class="mySlides fade">
+      <div class="numbertext">1 / 3</div>
+      
+      <div class="text">Caption Text</div>
+    </div>
+    
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 3</div>
+     
+      <div class="text">Caption Two</div>
+    </div>
+    
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 3</div>
+      
+      <div class="text">Caption Three</div>
+    </div>
+    
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+    
+    </div>
+    <br>
+    
+    <div style="text-align:center">
+      <span class="dot" onclick="currentSlide(1)"></span> 
+      <span class="dot" onclick="currentSlide(2)"></span> 
+      <span class="dot" onclick="currentSlide(3)"></span> 
+    </div>
+
+  </section>
+
+
+
+
+<section class= "content2 "id="switches">
+  <h1>Here you can manage your devices: </h1>
+  <div class="container" > <br></br> USB 1 &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" > 
+    	<input type="checkbox" id="USB1" checked/>
+    	<div onclick="SwitchUSB(event)" class="slider round" usb_num="1"></div>
+      </label> 
+  </div>
+  <!-- USB2--> 
+ <div class="container" > <br></br> USB 2 &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" > 
+    	<input type="checkbox" id="USB2" checked/>
+    	<div onclick="SwitchUSB(event)" class="slider round" usb_num="2"></div>
+      </label> 
+  </div>
+  <!-- USB3-->
+  <div class="container" > <br></br> USB 3 &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" > 
+    	<input type="checkbox" id="USB3" checked/>
+    	<div onclick="SwitchUSB(event)" class="slider round" usb_num="3"></div>
+      </label> 
+  </div>
+  <!-- USB4-->
+  <div class="container" > <br></br> USB 4 &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" > 
+    	<input type="checkbox" id="USB4" checked/>
+    	<div onclick="SwitchUSB(event)" class="slider round" usb_num="4"></div>
+      </label> 
+  </div>
+  <!-- USB5-->
+ <div class="container" > <br></br> USB 5 &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" > 
+    	<input type="checkbox" id="USB5" checked/>
+    	<div onclick="SwitchUSB(event)" class="slider round" usb_num="5"></div>
+      </label> 
+  </div>
+  <!-- USB6-->
+  <div class="container" > <br></br> USB 6 &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" > 
+    	<input type="checkbox" id="USB6" checked/>
+    	<div onclick="SwitchUSB(event)" class="slider round" usb_num="6"></div>
+      </label> 
+  </div>
+  <!-- USB7-->
+  <div class="container" > <br></br> USB 7 &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" > 
+    	<input type="checkbox" id="USB7" checked/>
+    	<div onclick="SwitchUSB(event)" class="slider round" usb_num="7"></div>
+      </label> 
+  </div>
+  <!-- USB8-->
+  <div class="container" > <br></br> USB 8 &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" > 
+    	<input type="checkbox" id="USB8" checked/>
+    	<div onclick="SwitchUSB(event)" class="slider round" usb_num="8"></div>
+      </label> 
+  </div>
+ <!-- JTAG-->
+  <div class="container" > <br></br> JTAG &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" class="JTAGStatus()"> 
+    	<input type="checkbox" id="JTAG" checked/>
+    	<div onclick="SwitchJTAG()" class="slider round" ></div>
+      </label> 
+  </div>
+ <!-- BOOT-->
+  <div class="container" > <br></br> BOOT &nbsp &nbsp &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" class="BOOTStatus()"> 
+    	<input type="checkbox" id="BOOT" checked/>
+    	<div onclick="SwitchBOOT()" class="slider round" ></div>
+      </label> 
+  </div>
+ <!-- POWER SUPPLY-->
+  <div class="container" > <br></br> POWER SUPPLY &nbsp &nbsp &nbsp
+      <label class="switch" for="checkbox" class="SUPPLYStatus()"> 
+    	<input type="checkbox" id="SUPPLY" checked/>
+    	<div onclick="SwitchSUPPLY()" class="slider round"></div>
+      </label> 
+  </div>
+</section>
+
+
+
+<section class = "content3" id = "coding">
+     <h1>Here you can write your code </h1>
+<p>Write your code:</p>
+
+	<textarea id="code" class="code-area" rows="20" cols="150"></textarea>
+	<button type="submit" onclick="SMART_WS()">COMPILE</button>
+
+
+<p>Compiling</p>
+
+	<textarea id="compiling" class="code-area" rows="40" cols="200"></textarea>
+	
+</section>
+
+<section class = "content4" id = "serial-area">
+	<h1>Here you can see and create Serial Terminals: </h1>
+ADD new Serial terminal: &nbsp &nbsp &nbsp   <button onclick="CREATE_SERIAL()">ADD</button> 
+
+<br id="accapo1"></br>
+
+ <label for="ttys" id="choosetty"> Choose tty:    &nbsp&nbsp</label>
+	<select name="tty" id="seltty0"></select>
+	
+<label for="speeds" id="choosespeed" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbspChoose speed:    &nbsp&nbsp</label>
+     <select name="speed" id="selspeed0" speed_num="0" class="SMART_SERIAL(event)">
+		<option value="9600">9600</option>
+		<option value="19200">19200</option>
+		<option value="38400">38400</option>
+		<option value="57600">57600</option>
+		<option value="115200">115200</option>
+		</select>
+	<span id="span">  &nbsp&nbsp          </span>
+	<button id="viewout" type="submit" onclick="SMART_SERIAL(event)" onclick="PORTS_ACTIVE(event)" view_num="0">VIEW</button>
+	<br id="accapo2"></br>
+	<textarea id="serial0" class="code-area" rows="15" cols="100" serial_num="0"></textarea>	
+		
+	</select>
+
+
+</section>
+
+
+
+<section class = "content5" id = "streaming">
+     <h1>Here you can see:  </h1>
+
+<img id = "stream" src=""/>
+</section>
+
+
+</body>
+
+<script>
+ 	$(document).ready(function () {
+			PORTS_ACTIVE();
+			USBStatus();
+ 			JTAGStatus();
+			SUPPLYStatus();
+			BOOTStatus();
+	               $("#stream").attr("src", "http://"+location.host+":9000/stream.mjpg");
+			
+        });
+</script> 
+
+<script>
+window.onscroll = function() {fixnavbar()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function fixnavbar() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
+
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+  
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+  
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+  
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+  }
+  </script>
+
+
+<script>
+function scrollLogToBottom(){
+	logTa=document.getElementById("compiling");
+	logTa.scrollTop = logTa.scrollHeight;
+	}
+</script>
+
+<script>
+var n=0;
+	var orseltty=document.getElementById("seltty0");
+	var orselspeed=document.getElementById('selspeed0');
+	var orserial=document.getElementById('serial0');
+	var orchoosetty=document.getElementById('choosetty');
+	var orchoosespeed=document.getElementById('choosespeed');
+	var oraccapo1=document.getElementById('accapo1');
+	var oraccapo2=document.getElementById('accapo2');
+	var orspan=document.getElementById('span');
+	var orbottom=document.getElementById('viewout');
+	
+	
+
+function CREATE_SERIAL(){
+	
+	n++;
+	var copyseltty=orseltty.cloneNode(true);
+	var copyselspeed=orselspeed.cloneNode(true);
+	var copyserial=orserial.cloneNode(true);
+	var copychoosetty=orchoosetty.cloneNode(true);
+	var copychoosespeed=orchoosespeed.cloneNode(true);
+	var copyaccapo1=oraccapo1.cloneNode(true);
+	var copyaccapo2=oraccapo2.cloneNode(true);	
+	var copybottom=orbottom.cloneNode(true);
+	var copyspan=orspan.cloneNode(true)
+	
+	copyseltty.id="seltty"+n;
+	copyselspeed.id="selspeed"+n;
+	copyserial.id="serial"+n;
+	copychoosetty.id="choosetty"+n;
+	copychoosespeed.id="choosespeed"+n;
+	copybottom.id="viewout"+n;
+	
+	copybottom.setAttribute("view_num",n);
+
+	
+	oraccapo1.parentNode.appendChild(copyaccapo1);
+	
+	orchoosetty.parentNode.appendChild(copychoosetty);
+	orseltty.parentNode.appendChild(copyseltty);
+	copyseltty.appendChild(document.createTextNode('\u00A0\u00A0\u00A0\u00A0'))
+	
+	orchoosespeed.parentNode.appendChild(copychoosespeed);
+	$.ajax({
+		   		method: "GET",
+		   		url: 'http://'+ location.host +':80/v2/port',
+		   		success: function(data, code, status) {
+					var datavector = data.split("\n");
+					let ports=new Array(datavector.length-1);
+					for(var i=0;i<datavector.length-1;i++){
+					ports[i]=datavector[i].replace('/dev/','');
+					}
+					console.log(ports[2])
+					for(i=0;i<ports.length;i++){
+						console.log(ports[i]);
+						var options = "<option value='"+ports[i]+"'>"+ports[i]+" </option>";
+						document.getElementById("seltty"+n).innerHTML+=options;
+						}
+					
+					
+				
+				},
+				
+		   		error: function() {console.log(arguments)},
+			});
+			    	
+
+ 		
+	orselspeed.parentNode.appendChild(copyselspeed);
+
+	orspan.parentNode.appendChild(copyspan);
+	
+	
+	orbottom.parentNode.appendChild(copybottom);
+	oraccapo2.parentNode.appendChild(copyaccapo2);
+	orserial.parentNode.appendChild(copyserial);
+	document.getElementById("serial"+n).value='';
+	
+	
+
+};
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+  
